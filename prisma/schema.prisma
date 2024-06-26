@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Nota {
+  id String @id @default(uuid())
+  titulo String
+  posicion Int
+  descripcion String?
+  fondoUrl String?
+  lista Lista @relation(fields: [listaId], references: [id])
+  listaId String
+  @@unique([listaId,titulo])
+}
+
+model Lista {
+  id String @id @default(uuid())
+  titulo String
+  posicion Int
+  notas Nota[]
+  tablero Tablero @relation(fields: [tableroId], references: [id])
+  tableroId String
+}
+
+model Tablero {
+  id String @id @default(uuid())
+  titulo String @unique
+  fondoUrl String?
+  listas Lista[]
+}
