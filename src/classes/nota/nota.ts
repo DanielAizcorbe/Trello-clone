@@ -1,13 +1,13 @@
 export class Nota {
     private id: string;
-    private nombre: string;
+    private titulo: string;
     private posicion: number;
     private descripcion: string;
     private fondoUrl: string;
 
     constructor(id: string, nombre: string, posicion: number, descripcion: string, fondoUrl: string) {
         this.id = id;
-        this.nombre = nombre;
+        this.titulo = nombre;
         this.posicion = posicion;
         this.descripcion = descripcion;
         this.fondoUrl = fondoUrl;
@@ -17,8 +17,8 @@ export class Nota {
         return this.id;
     }
 
-    public getNombre(): string {
-        return this.nombre;
+    public getTitulo(): string {
+        return this.titulo;
     }
 
     public getPosicion(): number {
@@ -37,8 +37,8 @@ export class Nota {
         this.id = id;
     }
 
-    public setNombre(nombre: string) {
-        this.nombre = nombre;
+    public setTitulo(titulo: string) {
+        this.titulo = titulo;
     }
 
     public setPosicion(posicion: number) {

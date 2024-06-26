@@ -1,7 +1,7 @@
 import { Nota } from "../nota/nota";
 
 export class Lista {
-    private id: string;
+    private readonly id: string;
     private nombre: string;
     private posicion: number;
     private notas: Nota[];

@@ -1,7 +1,7 @@
 import { Lista } from "../lista/lista";
 
 export class Tablero {
-    private id: string;
+    private readonly id: string;
     private nombre: string;
     private fondoUrl: string;
     private listas: Lista[];
