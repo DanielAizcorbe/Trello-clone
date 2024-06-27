@@ -42,4 +42,17 @@ export class TableroRepo {
         })
         return deletedTablero;
     }
+
+    async updateTablero(id: string, tableroData: { titulo?: string, fondoUrl?: string }) {
+        const updatedTablero = await this.dbConection.tablero.update({
+            where: {
+                id: id
+            },
+            data: {
+                titulo: tableroData.titulo,
+                fondoUrl: tableroData.fondoUrl
+            }
+        })
+        return updatedTablero;
+    }
 }
