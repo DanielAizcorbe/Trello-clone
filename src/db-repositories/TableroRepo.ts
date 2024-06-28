@@ -3,15 +3,19 @@ import { PrismaClient, Tablero } from '@prisma/client'
 const prisma = new PrismaClient();
 
 export class TableroRepo {
-    private readonly dbConection: PrismaClient;
+    private readonly dbConnection: PrismaClient;
 
     constructor() {
-        this.dbConection = prisma;
+        this.dbConnection = prisma;
+    }
+
+    private getConnection() {
+        return this.dbConnection.tablero;
     }
 
     async getTableros() {
-        const tableros = await this.dbConection
-            .tablero.findMany({
+        const tableros = await this.getConnection()
+            .findMany({
                 include: {
                     listas: true
                 }
@@ -20,7 +24,7 @@ export class TableroRepo {
     }
 
     async getTablero(nombre: string) {
-        const tablero = await this.dbConection.tablero.findUnique({
+        const tablero = await this.getConnection().findUnique({
             where: { titulo: nombre },
             include: { listas: true }
         })
@@ -28,14 +32,14 @@ export class TableroRepo {
     }
 
     async createTablero(tableroData: { titulo: string, fondoUrl?: string }) {
-        const tableroCreado = await this.dbConection.tablero.create({
+        const tableroCreado = await this.getConnection().create({
             data: tableroData
         })
         return tableroCreado;
     }
 
     async deteleTablero(nombre: string): Promise<Tablero> {
-        const deletedTablero = await this.dbConection.tablero.delete({
+        const deletedTablero = await this.getConnection().delete({
             where: {
                 titulo: nombre
             }
@@ -44,7 +48,7 @@ export class TableroRepo {
     }
 
     async updateTablero(nombre: string, tableroData: { titulo?: string, fondoUrl?: string }) {
-        const updatedTablero = await this.dbConection.tablero.update({
+        const updatedTablero = await this.getConnection().update({
             where: {
                 titulo: nombre
             },
