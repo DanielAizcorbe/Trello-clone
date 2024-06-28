@@ -15,7 +15,6 @@ model Nota {
   fondoUrl String? @default("")
   lista Lista @relation(fields: [listaId], references: [id])
   listaId String
-  @@unique([listaId,titulo])
 }
 
 model Lista {

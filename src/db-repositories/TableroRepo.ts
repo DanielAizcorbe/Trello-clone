@@ -19,9 +19,9 @@ export class TableroRepo {
         return tableros;
     }
 
-    async getTablero(id: string) {
+    async getTablero(nombre: string) {
         const tablero = await this.dbConection.tablero.findUnique({
-            where: { id: id },
+            where: { titulo: nombre },
             include: { listas: true }
         })
         return tablero;
@@ -34,19 +34,19 @@ export class TableroRepo {
         return tableroCreado;
     }
 
-    async deteleTablero(id: string): Promise<Tablero> {
+    async deteleTablero(nombre: string): Promise<Tablero> {
         const deletedTablero = await this.dbConection.tablero.delete({
             where: {
-                id: id
+                titulo: nombre
             }
         })
         return deletedTablero;
     }
 
-    async updateTablero(id: string, tableroData: { titulo?: string, fondoUrl?: string }) {
+    async updateTablero(nombre: string, tableroData: { titulo?: string, fondoUrl?: string }) {
         const updatedTablero = await this.dbConection.tablero.update({
             where: {
-                id: id
+                titulo: nombre
             },
             data: {
                 titulo: tableroData.titulo,
