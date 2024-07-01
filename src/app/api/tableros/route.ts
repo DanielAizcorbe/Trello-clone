@@ -13,3 +13,8 @@ export async function POST(request: NextRequest) {
     const tableroCreado = await repo.createTablero(res);
     return NextResponse.json(tableroCreado);
 }
+
+export async function DELETE(request: NextRequest) {
+    await repo.borrarTodo();
+    return NextResponse.json("borrados");
+}
