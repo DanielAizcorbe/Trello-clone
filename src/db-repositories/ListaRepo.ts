@@ -29,6 +29,9 @@ export class ListaRepo extends Repo {
             },
             data: {
                 titulo: data.titulo
+            },
+            include: {
+                notas: true
             }
         });
 
