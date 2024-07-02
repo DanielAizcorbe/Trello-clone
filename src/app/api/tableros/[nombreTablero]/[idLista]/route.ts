@@ -25,7 +25,7 @@ export async function POST(req: NextRequest, urlParams: Params) {
     const body = await req.json();
     const cantidadNotas = await repo.cantidadNotas(params.idLista);
     const notaData: CreationNotaData = {
-        listaId: body.listaId,
+        listaId: params.idLista,
         posicion: cantidadNotas + 1,
         titulo: body.titulo,
         descripcion: body.descripcion,
