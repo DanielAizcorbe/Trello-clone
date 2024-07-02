@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
-import prisma from "../../prisma/prisma";
+import { PrismaSingleton } from "../../prisma/prisma";
 
 export abstract class Repo {
     private readonly dbConnection: PrismaClient;
 
     constructor() {
-        this.dbConnection = prisma;
+        this.dbConnection = PrismaSingleton.getInstance();
     }
 
     getConnection(): PrismaClient {
