@@ -10,7 +10,7 @@ export class ListaRepo extends Repo {
         return super.getConnection().lista;
     }
 
-    async createList(idTablero: string, data: any) {
+    async createList(idTablero: number, data: any) {
         const list = await this.db().create({
             data: {
                 tableroId: idTablero,
@@ -22,7 +22,7 @@ export class ListaRepo extends Repo {
         return list;
     }
 
-    async updateLista(lista: string, data: any) {
+    async updateLista(lista: number, data: any) {
         const listaActualizada = await this.db().update({
             where: {
                 id: lista
@@ -43,7 +43,7 @@ export class ListaRepo extends Repo {
         return notaCreada;
     }
 
-    async cantidadNotas(idLista: string) {
+    async cantidadNotas(idLista: number) {
         const count = await this.db().findMany({
             where: { id: idLista },
             select: {
@@ -56,7 +56,7 @@ export class ListaRepo extends Repo {
         return count[0]?._count?.notas || 0;
     }
 
-    async borrarLista(idLista: string) {
+    async borrarLista(idLista: number) {
         const borrado = await this.db().delete({
             where: {
                 id: idLista

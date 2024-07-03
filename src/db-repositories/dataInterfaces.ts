@@ -1,7 +1,7 @@
 export interface CreationNotaData {
     titulo: string,
     posicion: number,
-    listaId: string,
+    listaId: number,
     descripcion?: string,
     fondoUrl?: string,
 }
