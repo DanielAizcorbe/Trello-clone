@@ -8,26 +8,26 @@ datasource db {
 }
 
 model Nota {
-  id          String  @id @default(uuid())
+  id          Int  @id @default(autoincrement())
   titulo      String
   posicion    Int
   descripcion String? @default("")
   fondoUrl    String? @default("")
   lista       Lista   @relation(fields: [listaId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  listaId     String
+  listaId     Int
 }
 
 model Lista {
-  id        String  @id @default(uuid())
+  id        Int  @id @default(autoincrement())
   titulo    String
   posicion  Int
   notas     Nota[]
   tablero   Tablero @relation(fields: [tableroId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  tableroId String
+  tableroId Int
 }
 
 model Tablero {
-  id       String  @id @default(uuid())
+  id       Int  @id @default(autoincrement())
   titulo   String  @unique
   fondoUrl String?
   listas   Lista[]
