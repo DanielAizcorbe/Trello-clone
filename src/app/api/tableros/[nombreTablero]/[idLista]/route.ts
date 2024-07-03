@@ -15,7 +15,8 @@ interface Params {
 export async function PUT(req: NextRequest, urlParams: Params) {
     const { params } = urlParams;
     const body = await req.json();
-    const recursoActualizado = await repo.updateLista(params.idLista, body)
+    const id = parseInt(params.idLista);
+    const recursoActualizado = await repo.updateLista(id, body)
     return NextResponse.json(recursoActualizado);
 }
 
@@ -23,9 +24,10 @@ export async function PUT(req: NextRequest, urlParams: Params) {
 export async function POST(req: NextRequest, urlParams: Params) {
     const { params } = urlParams;
     const body = await req.json();
-    const cantidadNotas = await repo.cantidadNotas(params.idLista);
+    const listaId = parseInt(params.idLista);
+    const cantidadNotas = await repo.cantidadNotas(listaId);
     const notaData: CreationNotaData = {
-        listaId: params.idLista,
+        listaId: listaId,
         posicion: cantidadNotas + 1,
         titulo: body.titulo,
         descripcion: body.descripcion,
@@ -38,7 +40,7 @@ export async function POST(req: NextRequest, urlParams: Params) {
 
 // BORRAR LISTA
 export async function DELETE(req: NextRequest, urlParams: Params) {
-    const idLista = urlParams.params.idLista;
+    const idLista = parseInt(urlParams.params.idLista);
     const recursoEliminado = await repo.borrarLista(idLista);
     return NextResponse.json(recursoEliminado);
 }
